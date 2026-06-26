@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600;1,700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@1,700;1,800&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --font-sans: var(--app-font-sans);
+  --font-serif: var(--app-font-serif);
+  --font-mono: var(--app-font-mono);
+  --font-display: var(--app-font-display);
+}
+
+:root {
+  --background: 0 0% 4%;
+  --foreground: 60 14% 96%;
+  --border: 152 100% 50% / 0.15;
+  --input: 152 100% 50% / 0.2;
+  --ring: 152 100% 50%;
+
+  --card: 0 0% 100% / 0.03;
+  --card-foreground: 60 14% 96%;
+  --card-border: 152 100% 50% / 0.12;
+
+  --primary: 152 100% 50%;
+  --primary-foreground: 0 0% 4%;
+
+  --muted: 60 4% 53%;
+  --muted-foreground: 60 4% 70%;
+
+  --app-font-sans: 'DM Sans', sans-serif;
+  --app-font-serif: 'Cormorant Garamond', serif;
+  --app-font-mono: 'JetBrains Mono', monospace;
+  --app-font-display: 'Playfair Display', serif;
+}
+
+.dark {
+  --background: 0 0% 4%;
+  --foreground: 60 14% 96%;
+  --border: 152 100% 50% / 0.15;
+  --input: 152 100% 50% / 0.2;
+  --ring: 152 100% 50%;
+  --card: 0 0% 100% / 0.03;
+  --card-foreground: 60 14% 96%;
+  --card-border: 152 100% 50% / 0.12;
+  --primary: 152 100% 50%;
+  --primary-foreground: 0 0% 4%;
+  --muted: 60 4% 53%;
+  --muted-foreground: 60 4% 70%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+/* ── Glassmorphism card — bright glowing border ── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 255, 136, 0.30);
+  backdrop-filter: blur(24px);
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 136, 0.08),
+    0 0 30px rgba(0, 255, 136, 0.18),
+    0 0 80px rgba(0, 255, 136, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+  border-radius: 20px;
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.glass-card:hover {
+  border-color: rgba(0, 255, 136, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 136, 0.15),
+    0 0 50px rgba(0, 255, 136, 0.30),
+    0 0 100px rgba(0, 255, 136, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+/* ── Gold gradient title ── */
+.text-gradient-gold {
+  background: linear-gradient(to right, #FFD700, #FF6B00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Green gradient title ── */
+.text-gradient-green {
+  background: linear-gradient(135deg, #00FF88 0%, #00C96A 50%, #00FF88 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Neon CTA button ── */
+.btn-neon {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.btn-neon::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(0,255,136,0.6), transparent, rgba(0,255,136,0.3));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.btn-neon::after {
+  content: '';
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  border-radius: inherit;
+  border: 1px solid #00FF88;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.7), 0 0 40px rgba(0, 255, 136, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+.btn-neon:hover::after,
+.btn-neon:hover::before {
+  opacity: 1;
+}
+@keyframes neon-pulse {
+  0%, 100% { opacity: 0.6; box-shadow: 0 0 20px rgba(0,255,136,0.7), 0 0 40px rgba(0,255,136,0.3); }
+  50% { opacity: 1; box-shadow: 0 0 30px rgba(0,255,136,1), 0 0 60px rgba(0,255,136,0.5); }
+}
+
+/* ── Scroll-reveal animations ── */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for child sections */
+.animate-on-scroll:nth-child(2) { transition-delay: 0.1s; }
+.animate-on-scroll:nth-child(3) { transition-delay: 0.2s; }
+.animate-on-scroll:nth-child(4) { transition-delay: 0.3s; }
+
+/* ── Hero parallax transition ── */
+.hero-content {
+  transition: opacity 0.1s linear, transform 0.1s linear;
+  will-change: opacity, transform;
+}
+
+/* ── Section reveal with blur-in ── */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  filter: blur(4px);
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.section-reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* ── Map markers ── */
+.custom-marker-green {
+  background-color: #00FF88;
+  border-radius: 50%;
+  box-shadow: 0 0 20px 8px rgba(0, 255, 136, 0.8);
+  border: 2px solid white;
+  animation: marker-pulse-green 1.8s ease-in-out infinite;
+}
+.custom-marker-orange {
+  background-color: #FF6B00;
+  border-radius: 50%;
+  box-shadow: 0 0 20px 8px rgba(255, 107, 0, 0.8);
+  border: 2px solid white;
+  animation: marker-pulse-orange 1.8s ease-in-out infinite;
+}
+.custom-marker-gold {
+  background-color: #FFD700;
+  border-radius: 50%;
+  box-shadow: 0 0 14px 6px rgba(255, 215, 0, 0.7);
+  border: 2px solid white;
+  animation: marker-pulse-gold 2.2s ease-in-out infinite;
+}
+@keyframes marker-pulse-gold {
+  0%, 100% { box-shadow: 0 0 14px 6px rgba(255, 215, 0, 0.7); }
+  50% { box-shadow: 0 0 22px 10px rgba(255, 215, 0, 0.35); }
+}
+@keyframes marker-pulse-green {
+  0%, 100% { box-shadow: 0 0 20px 8px rgba(0, 255, 136, 0.8); }
+  50% { box-shadow: 0 0 30px 14px rgba(0, 255, 136, 0.4); }
+}
+@keyframes marker-pulse-orange {
+  0%, 100% { box-shadow: 0 0 20px 8px rgba(255, 107, 0, 0.8); }
+  50% { box-shadow: 0 0 30px 14px rgba(255, 107, 0, 0.4); }
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0A0A0A; }
+::-webkit-scrollbar-thumb { background: rgba(0,255,136,0.3); border-radius: 2px; }
+
+/* ── Page transitions ── */
+@keyframes transOverlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes transOverlayOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-enter {
+  animation: pageEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Live Tracking map markers ── */
+.custom-tracker-beacon {
+  background-color: #00E5FF;
+  border-radius: 50%;
+  box-shadow: 0 0 24px 10px rgba(0, 229, 255, 0.85);
+  border: 2px solid white;
+  animation: marker-pulse-cyan 1.6s ease-in-out infinite;
+}
+.custom-tracker-dest {
+  background-color: #FFA726;
+  border-radius: 50%;
+  box-shadow: 0 0 16px 6px rgba(255, 167, 38, 0.7);
+  border: 2.5px solid white;
+  animation: marker-pulse-amber 2s ease-in-out infinite;
+}
+.custom-tracker-start {
+  background-color: #00FF88;
+  border-radius: 50%;
+  box-shadow: 0 0 12px 4px rgba(0, 255, 136, 0.6);
+  border: 1.5px solid white;
+}
+@keyframes marker-pulse-cyan {
+  0%, 100% { box-shadow: 0 0 24px 10px rgba(0, 229, 255, 0.85); }
+  50% { box-shadow: 0 0 34px 16px rgba(0, 229, 255, 0.45); }
+}
+@keyframes marker-pulse-amber {
+  0%, 100% { box-shadow: 0 0 16px 6px rgba(255, 167, 38, 0.7); }
+  50% { box-shadow: 0 0 26px 12px rgba(255, 167, 38, 0.35); }
+}
+
