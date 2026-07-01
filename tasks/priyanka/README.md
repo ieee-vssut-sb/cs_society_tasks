@@ -1,5 +1,7 @@
 # 🌍 Meridian — Geolocation, Coordinate Comparator & Threat Intelligence Platform
 
+> **🚀 Live Demo**: [https://meridian-ochre-ten.vercel.app/](https://meridian-ochre-ten.vercel.app/)
+
 Meridian is a high-fidelity, highly interactive React 19 web application built for the **IEEE Computer Society Tasks**. It goes beyond simple location lookup to provide a complete geospatial suite, offering side-by-side location comparisons, network threat reputation analysis, and secure authentication.
 
 ### 🎯 The Challenge & Goal
