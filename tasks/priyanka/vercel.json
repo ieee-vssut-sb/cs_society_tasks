@@ -1,0 +1,8 @@
+{
+  "cleanUrls": true,
+  "buildCommand": "pnpm --filter @workspace/meridian build",
+  "outputDirectory": "packages/meridian/dist/public",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
